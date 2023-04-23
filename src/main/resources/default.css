@@ -1,0 +1,15 @@
+graph {}
+
+node {
+size: 20px, 20px;
+shape: box;
+fill-color: green;
+stroke-mode: plain;
+stroke-color: yellow;
+text-size: 15;
+}
+
+edge {
+text-size: 15;
+text-alignment: above;
+}
