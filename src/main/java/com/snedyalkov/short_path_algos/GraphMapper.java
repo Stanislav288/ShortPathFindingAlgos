@@ -1,5 +1,6 @@
 package com.snedyalkov.short_path_algos;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,12 +9,14 @@ import org.graphstream.graph.implementations.SingleGraph;
 import org.jgrapht.alg.util.Triple;
 
 public class GraphMapper {
-		
+
+	private static AtomicInteger counter = new AtomicInteger();
+
 	private GraphMapper() {
 	}
 
 	public static <V, E> Graph convertGraph(org.jgrapht.Graph<V, E> jgrapht) {
-        Graph graphstream = new SingleGraph("Graphstream Graph");
+        Graph graphstream = new SingleGraph("Graphstream Graph " + counter.getAndIncrement());
 
         for (V vertex : jgrapht.vertexSet()) {
             graphstream.addNode(vertex.toString());

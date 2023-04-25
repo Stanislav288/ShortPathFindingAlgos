@@ -1,17 +1,25 @@
 package com.snedyalkov.short_path_algos;
 
 import org.jgrapht.Graphs;
+import org.jgrapht.alg.shortestpath.BFSShortestPath;
 import org.jgrapht.alg.shortestpath.TreeSingleSourcePathsImpl;
 import org.jgrapht.alg.util.Pair;
 
 import java.util.*;
 
+/**
+ * This class is a copy of the {@link BFSShortestPath} class
+ * with the difference with that it uses {@link Stack} instead {@link Deque}
+ * which is the main difference between BFS and DFS
+ *
+ */
 public class DFSShortestPath<V, E> extends org.jgrapht.alg.shortestpath.BFSShortestPath<V, E> {
 
 	/**
 	 * Construct a new instance.
 	 *
-	 * @param graph the input graph
+	 * @param graph
+	 * 			the input graph
 	 */
 	public DFSShortestPath(org.jgrapht.Graph graph) {
 		super(graph);
@@ -36,8 +44,8 @@ public class DFSShortestPath<V, E> extends org.jgrapht.alg.shortestpath.BFSShort
 		stack.push(source);
 
 		/*
-		 * Take the top most vertex from the queue, relax its outgoing edges, update the distance of
-		 * the neighbouring vertices and push them into the queue
+		 * Take the top most vertex from the stack, relax its outgoing edges, update the distance of
+		 * the neighbouring vertices and push them into the stack
 		 */
 		while (!stack.isEmpty()) {
 			V v = stack.pop();
