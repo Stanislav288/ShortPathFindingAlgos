@@ -1,9 +1,6 @@
 package com.snedyalkov.short_path_algos;
 
-import org.jgrapht.alg.shortestpath.AStarShortestPath;
-import org.jgrapht.alg.shortestpath.BFSShortestPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.alg.shortestpath.FloydWarshallShortestPaths;
+import org.jgrapht.alg.shortestpath.*;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.util.SupplierUtil;
 
@@ -17,7 +14,8 @@ public class Main {
 				SupplierUtil.createSupplier(CoordinateVertex.class), SupplierUtil.createSupplier(ExtentedEdge.class));
 
 		int numberOfNodes = 20;
-		double p = 0.5;
+		double p = 0.5d;
+		boolean displayGraph = true;
 
 		GenerateRandomGraph generateRandomGraph = new GenerateRandomGraph(jgraphtGraph, numberOfNodes, p);
 		generateRandomGraph.generateGraph();
@@ -25,8 +23,6 @@ public class Main {
 		CoordinateVertex startVertex = jgraphtGraph.vertexSet().stream().filter(v -> v.getId() == 0).findFirst().get();
 		int vertexSetLastElementId = jgraphtGraph.vertexSet().size() / 2 - 1;
 		CoordinateVertex endVertex = jgraphtGraph.vertexSet().stream().filter(v ->v.getId() == vertexSetLastElementId).findFirst().get();
-
-		boolean displayGraph = true;
 
 		ShortPathAnalyzer dijkstra = new ShortPathAnalyzer(
 				jgraphtGraph,
@@ -71,7 +67,7 @@ public class Main {
 
 		ShortPathAnalyzer bellmanFordShortestPath = new ShortPathAnalyzer(
 				jgraphtGraph,
-				new FloydWarshallShortestPaths<>(jgraphtGraph),
+				new BellmanFordShortestPath<>(jgraphtGraph),
 				startVertex,
 				endVertex,
 				displayGraph);

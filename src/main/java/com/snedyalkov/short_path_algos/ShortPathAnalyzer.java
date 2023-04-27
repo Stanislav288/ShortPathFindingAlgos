@@ -1,9 +1,13 @@
 package com.snedyalkov.short_path_algos;
 
 import org.apache.commons.lang3.time.StopWatch;
+import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
+import org.graphstream.ui.fx_viewer.FxViewer;
+import org.graphstream.ui.view.Viewer;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 
+import javax.swing.text.View;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -13,23 +17,26 @@ import java.util.List;
 public class ShortPathAnalyzer {
 
     static {
-        System.setProperty("org.graphstream.ui", "javafx");
-        //System.setProperty("org.graphstream.ui", "swing");
+        //System.setProperty("org.graphstream.ui", "javafx");
+        System.setProperty("org.graphstream.ui", "swing");
         System.setProperty("org.graphstream.debug", "true");
     }
-    private StopWatch stopWatch;
+    private final StopWatch stopWatch;
 
-    private org.jgrapht.Graph<CoordinateVertex, ExtentedEdge> jgraphtGraph;
+    private final org.jgrapht.Graph<CoordinateVertex, ExtentedEdge> jgraphtGraph;
 
-    private ShortestPathAlgorithm<CoordinateVertex, ExtentedEdge> shortestPathAlgorithm;
+    private final ShortestPathAlgorithm<CoordinateVertex, ExtentedEdge> shortestPathAlgorithm;
+
+    private final CoordinateVertex startVertex;
+    private final CoordinateVertex endVertex;
+
+    private final boolean displayGraph;
+
     private List<CoordinateVertex> shortestPathVertexes;
 
     private List<ExtentedEdge> shortestPathEdges;
 
-    private CoordinateVertex startVertex;
-    private CoordinateVertex endVertex;
-
-    private boolean displayGraph;
+    private String algorithmName;
 
     public ShortPathAnalyzer(org.jgrapht.Graph<CoordinateVertex, ExtentedEdge> jgraphtGraph,
             ShortestPathAlgorithm<CoordinateVertex, ExtentedEdge> shortestPathAlgorithm,
@@ -42,6 +49,7 @@ public class ShortPathAnalyzer {
         this.startVertex = startVertex;
         this.endVertex = endVertex;
         this.displayGraph = displayGraph;
+        this.algorithmName = shortestPathAlgorithm.getClass().getSimpleName();
     }
 
     private void preAnalyze(){
@@ -50,12 +58,6 @@ public class ShortPathAnalyzer {
 
     public void analyze() throws URISyntaxException, IOException {
         this.preAnalyze();
-
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
 
         org.jgrapht.GraphPath<CoordinateVertex, ExtentedEdge> graphPath =
                         this.shortestPathAlgorithm.getPath(startVertex, endVertex);
@@ -72,9 +74,9 @@ public class ShortPathAnalyzer {
     private void postAnalyze(){
         stopWatch.stop();
 
-        System.out.println("stopWatch " + shortestPathAlgorithm.getClass().getSimpleName() + " = " + stopWatch);
-        System.out.println("shortestPathVertexes " + shortestPathAlgorithm.getClass().getSimpleName() + " = " + shortestPathVertexes);
-        System.out.println("shortestPathEdges " + shortestPathAlgorithm.getClass().getSimpleName() + " = " + shortestPathEdges);
+        System.out.println("stopWatch " + algorithmName + " = " + stopWatch);
+        System.out.println("shortestPathVertexes " + algorithmName + " = " + shortestPathVertexes);
+        System.out.println("shortestPathEdges " + algorithmName + " = " + shortestPathEdges);
         System.out.println("====================================================================================");
 
         stopWatch.reset();
@@ -95,7 +97,6 @@ public class ShortPathAnalyzer {
         for (ExtentedEdge edge : jgraphtGraph.edgeSet()) {
             if(shortestPathEdges.contains(edge)) {
                 graphstreamGraph.getEdge(edge.toString()).setAttribute("ui.style", "fill-color: red;");
-
             }
 
             graphstreamGraph.getEdge(edge.toString()).setAttribute("ui.label", String.format("%.2f", edge.getWeight()));
@@ -104,6 +105,8 @@ public class ShortPathAnalyzer {
         String stylesheet = Files.readString(Paths.get(ShortPathAnalyzer.class.getResource("/default.css").toURI()));
         graphstreamGraph.setAttribute("ui.stylesheet", stylesheet);
 
-        graphstreamGraph.display();
+        graphstreamGraph.setAttribute("ui.title", algorithmName);
+
+        Viewer viewer = graphstreamGraph.display();
     }
 }

@@ -3,14 +3,14 @@ package com.snedyalkov.short_path_algos;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CoordinateVertex{
+public class CoordinateVertex {
 
-    private static AtomicInteger counter = new AtomicInteger(0);
-    private static Random random = new Random();
+    private static final AtomicInteger counter = new AtomicInteger(0);
+    private static final Random random = new Random();
 
-    private int id;
-    private int x;
-    private int y;
+    private final int id;
+    private final int x;
+    private final int y;
 
     public CoordinateVertex(){
         //Integer id, String x, String y

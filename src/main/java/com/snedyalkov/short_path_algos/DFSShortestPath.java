@@ -8,7 +8,7 @@ import org.jgrapht.alg.util.Pair;
 import java.util.*;
 
 /**
- * This class is a copy of the {@link BFSShortestPath} class
+ * This class is a similar to the {@link BFSShortestPath} class
  * with the difference with that it uses {@link Stack} instead {@link Deque}
  * which is the main difference between BFS and DFS
  *

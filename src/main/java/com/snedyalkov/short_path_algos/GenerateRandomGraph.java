@@ -10,9 +10,9 @@ public class GenerateRandomGraph {
 
     private Graph<CoordinateVertex, ExtentedEdge> jgraphtGraph;
 
-    private int numberOfNodes;
+    private final int numberOfNodes;
 
-    private double p;
+    private final double p;
 
     public GenerateRandomGraph(Graph jgraphtGraph,
                                int numberOfNodes,
@@ -39,9 +39,9 @@ public class GenerateRandomGraph {
 
         }
 
-        System.out.println("StopWatch Graph Generation => " + stopWatch);
+        System.out.println("StopWatch Random Graph Generation => " + stopWatch);
         System.out.println("====================================================================================");
-        //StopWatch class is used to measure elapsed time.
+
         stopWatch.reset();
     }
 }

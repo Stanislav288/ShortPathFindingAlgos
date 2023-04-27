@@ -7,7 +7,7 @@ import org.jgrapht.alg.interfaces.AStarAdmissibleHeuristic;
 
 public class AStarBasicHeuristic<V> implements AStarAdmissibleHeuristic<V> {
 
-    private	EuclideanDistance euclideanDistance = new EuclideanDistance();
+    private final EuclideanDistance euclideanDistance = new EuclideanDistance();
 
     @Override
     public double getCostEstimate(V sourceVertex, V targetVertex) {
