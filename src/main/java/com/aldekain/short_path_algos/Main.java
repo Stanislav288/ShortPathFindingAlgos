@@ -1,4 +1,4 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
 import org.jgrapht.alg.shortestpath.*;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
@@ -14,7 +14,7 @@ public class Main {
 				SupplierUtil.createSupplier(CoordinateVertex.class), SupplierUtil.createSupplier(ExtentedEdge.class));
 
 		int numberOfNodes = 20;
-		double p = 0.5d;
+		double p = 0.3d;
 		boolean displayGraph = true;
 
 		GenerateRandomGraph generateRandomGraph = new GenerateRandomGraph(jgraphtGraph, numberOfNodes, p);
@@ -23,14 +23,6 @@ public class Main {
 		CoordinateVertex startVertex = jgraphtGraph.vertexSet().stream().filter(v -> v.getId() == 0).findFirst().get();
 		int vertexSetLastElementId = jgraphtGraph.vertexSet().size() / 2 - 1;
 		CoordinateVertex endVertex = jgraphtGraph.vertexSet().stream().filter(v ->v.getId() == vertexSetLastElementId).findFirst().get();
-
-		ShortPathAnalyzer dijkstra = new ShortPathAnalyzer(
-				jgraphtGraph,
-				new DijkstraShortestPath<>(jgraphtGraph),
-				startVertex,
-				endVertex,
-				displayGraph);
-		dijkstra.analyze();
 
 		ShortPathAnalyzer bfs = new ShortPathAnalyzer(
 				jgraphtGraph,
@@ -48,6 +40,14 @@ public class Main {
 				displayGraph);
 		dfs.analyze();
 
+		ShortPathAnalyzer dijkstra = new ShortPathAnalyzer(
+				jgraphtGraph,
+				new DijkstraShortestPath<>(jgraphtGraph),
+				startVertex,
+				endVertex,
+				displayGraph);
+		dijkstra.analyze();
+
 		AStarBasicHeuristic heuristic = new AStarBasicHeuristic();
 		ShortPathAnalyzer aStar = new ShortPathAnalyzer(
 				jgraphtGraph,
@@ -57,14 +57,6 @@ public class Main {
 				displayGraph);
 		aStar.analyze();
 
-		ShortPathAnalyzer floydWarshall = new ShortPathAnalyzer(
-				jgraphtGraph,
-				new FloydWarshallShortestPaths<>(jgraphtGraph),
-				startVertex,
-				endVertex,
-				displayGraph);
-		floydWarshall.analyze();
-
 		ShortPathAnalyzer bellmanFordShortestPath = new ShortPathAnalyzer(
 				jgraphtGraph,
 				new BellmanFordShortestPath<>(jgraphtGraph),
@@ -72,5 +64,13 @@ public class Main {
 				endVertex,
 				displayGraph);
 		bellmanFordShortestPath.analyze();
+
+		ShortPathAnalyzer floydWarshall = new ShortPathAnalyzer(
+				jgraphtGraph,
+				new FloydWarshallShortestPaths<>(jgraphtGraph),
+				startVertex,
+				endVertex,
+				displayGraph);
+		floydWarshall.analyze();
 	}
 }

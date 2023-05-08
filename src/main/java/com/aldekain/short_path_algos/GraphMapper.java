@@ -1,4 +1,4 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
@@ -23,7 +23,7 @@ public class GraphMapper {
         }
 
         for (E currentEdge : jgrapht.edgeSet()) {
-	        Triple<String, String, String> triple = extractEdgeVertexes(currentEdge.toString());
+	        Triple<String, String, String> triple = extractVertexEdges(currentEdge.toString());
 
         	int source = Integer.parseInt(triple.getFirst());
         	int target = Integer.parseInt(triple.getSecond());
@@ -32,12 +32,11 @@ public class GraphMapper {
         	graphstream.addEdge(currentEdge.toString(), source, target).setAttribute("length", weight);
         }
 
-
       return graphstream;
 	}
 
 
-	private static Triple<String, String, String> extractEdgeVertexes(String input){
+	private static Triple<String, String, String> extractVertexEdges(String input){
 		Pattern pattern = Pattern.compile("\\((.*)\\s:\\s(.*)\\s:\\s(.*)\\)");
         Matcher matcher = pattern.matcher(input);
 

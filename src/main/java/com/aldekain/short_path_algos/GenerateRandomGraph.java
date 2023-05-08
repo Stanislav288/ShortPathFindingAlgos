@@ -1,4 +1,4 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.jgrapht.Graph;

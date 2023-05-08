@@ -1,4 +1,4 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
 import org.jgrapht.Graphs;
 import org.jgrapht.alg.shortestpath.BFSShortestPath;

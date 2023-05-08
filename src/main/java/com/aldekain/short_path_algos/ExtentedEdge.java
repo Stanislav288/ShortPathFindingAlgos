@@ -1,12 +1,9 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
 
 public class ExtentedEdge extends DefaultWeightedEdge{
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = -6319623114716716868L;
 
 	@Override

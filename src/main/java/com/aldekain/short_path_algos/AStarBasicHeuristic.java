@@ -1,6 +1,5 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
-import com.snedyalkov.short_path_algos.CoordinateVertex;
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.interfaces.AStarAdmissibleHeuristic;

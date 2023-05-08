@@ -1,13 +1,10 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
-import org.graphstream.ui.fx_viewer.FxViewer;
 import org.graphstream.ui.view.Viewer;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 
-import javax.swing.text.View;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;

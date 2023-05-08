@@ -1,4 +1,4 @@
-package com.snedyalkov.short_path_algos;
+package com.aldekain.short_path_algos;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
